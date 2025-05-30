@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}Appointments - Hospital Management System{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0"><i class="fas fa-calendar-check me-2"></i>Appointments</h2>
+    <a href="{{ url_for('main.add_appointment') }}" class="btn btn-primary">
+        <i class="fas fa-plus me-2"></i>New Appointment
+    </a>
+</div>
+
+<!-- Search and Filter -->
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <form method="GET" class="row g-3">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" placeholder="Search appointments..." value="{{ search }}">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" name="status">
+                    <option value="">All Status</option>
+                    <option value="scheduled" {% if status == 'scheduled' %}selected{% endif %}>Scheduled</option>
+                    <option value="completed" {% if status == 'completed' %}selected{% endif %}>Completed</option>
+                    <option value="canceled" {% if status == 'canceled' %}selected{% endif %}>Canceled</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="date" class="form-control" name="date" value="{{ date }}">
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Appointments List -->
+<div class="card shadow">
+    <div class="card-body p-0">
+        {% if appointments %}
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Patient</th>
+                        <th>Doctor</th>
+                        <th>Purpose</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                    <tr>
+                        <td>
+                            {{ appointment.appointment_date.strftime('%d-%m-%Y') }}<br>
+                            <small class="text-muted">{{ appointment.appointment_time.strftime('%I:%M %p') }}</small>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('main.view_patient', id=appointment.patient.id) }}" class="text-decoration-none">
+                                {{ appointment.patient.get_full_name() }}
+                            </a>
+                        </td>
+                        <td>{{ appointment.doctor.user.get_full_name() }}</td>
+                        <td>{{ appointment.purpose }}</td>
+                        <td>
+                            {% if appointment.status == 'scheduled' %}
+                            <span class="badge bg-info">{{ appointment.status }}</span>
+                            {% elif appointment.status == 'completed' %}
+                            <span class="badge bg-success">{{ appointment.status }}</span>
+                            {% elif appointment.status == 'canceled' %}
+                            <span class="badge bg-danger">{{ appointment.status }}</span>
+                            {% else %}
+                            <span class="badge bg-warning">{{ appointment.status }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ url_for('main.view_appointment', id=appointment.id) }}" class="btn btn-outline-info" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                {% if appointment.status == 'scheduled' %}
+                                <a href="{{ url_for('main.edit_appointment', id=appointment.id) }}" class="btn btn-outline-primary" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button type="button" class="btn btn-outline-danger" title="Cancel" 
+                                        onclick="confirmCancel('{{ url_for('main.cancel_appointment', id=appointment.id) }}')">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fas fa-calendar-day fa-3x text-muted mb-3"></i>
+            <p class="lead">No appointments found.</p>
+            <a href="{{ url_for('main.add_appointment') }}" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Schedule New Appointment
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function confirmCancel(url) {
+    if (confirm('Are you sure you want to cancel this appointment?')) {
+        window.location.href = url;
+    }
+}
+</script>
+{% endblock %}

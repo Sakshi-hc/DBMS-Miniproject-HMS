@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block title %}Bill #{{ bill.id }} - Hospital Management System{% endblock %}
+
+{% block content %}
+<div class="card shadow">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+            <i class="fas fa-file-invoice-dollar me-2"></i>Bill #{{ bill.id }}
+            {% if bill.payment_status == 'pending' %}
+            <span class="badge bg-warning ms-2">{{ bill.payment_status }}</span>
+            {% elif bill.payment_status == 'partial' %}
+            <span class="badge bg-info ms-2">{{ bill.payment_status }}</span>
+            {% elif bill.payment_status == 'paid' %}
+            <span class="badge bg-success ms-2">{{ bill.payment_status }}</span>
+            {% endif %}
+        </h5>
+        <div>
+            <a href="{{ url_for('main.edit_bill', id=bill.id) }}" class="btn btn-sm btn-outline-primary me-2">
+                <i class="fas fa-edit me-1"></i> Edit
+            </a>
+            <button class="btn btn-sm btn-outline-success me-2" onclick="window.print()">
+                <i class="fas fa-print me-1"></i> Print
+            </button>
+            <a href="{{ url_for('main.billing') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Back to Billing
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h6 class="mb-3">Patient Information</h6>
+                <p>
+                    <strong>Patient:</strong> 
+                    <a href="{{ url_for('main.view_patient', id=bill.patient.id) }}">
+                        {{ bill.patient.get_full_name() }}
+                    </a><br>
+                    <strong>Phone:</strong> {{ bill.patient.phone }}<br>
+                    {% if bill.patient.email %}
+                    <strong>Email:</strong> {{ bill.patient.email }}<br>
+                    {% endif %}
+                    {% if bill.patient.address %}
+                    <strong>Address:</strong> {{ bill.patient.address }}<br>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <h6 class="mb-3">Bill Information</h6>
+                <p>
+                    <strong>Bill Number:</strong> {{ bill.id }}<br>
+                    <strong>Date:</strong> {{ bill.bill_date.strftime('%d-%m-%Y') }}<br>
+                    {% if bill.payment_method %}
+                    <strong>Payment Method:</strong> {{ bill.payment_method|replace('_', ' ')|capitalize }}<br>
+                    {% endif %}
+                    <strong>Status:</strong> 
+                    {% if bill.payment_status == 'pending' %}
+                    <span class="badge bg-warning">{{ bill.payment_status }}</span><br>
+                    {% elif bill.payment_status == 'partial' %}
+                    <span class="badge bg-info">{{ bill.payment_status }}</span><br>
+                    {% elif bill.payment_status == 'paid' %}
+                    <span class="badge bg-success">{{ bill.payment_status }}</span><br>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h6 class="mb-0">Bill Details</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Description</th>
+                                        <th class="text-end">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if bill.doctor_fee > 0 %}
+                                    <tr>
+                                        <td>Doctor Fee</td>
+                                        <td class="text-end">${{ "%.2f"|format(bill.doctor_fee) }}</td>
+                                    </tr>
+                                    {% endif %}
+                                    
+                                    {% if bill.medication_charges > 0 %}
+                                    <tr>
+                                        <td>Medication Charges</td>
+                                        <td class="text-end">${{ "%.2f"|format(bill.medication_charges) }}</td>
+                                    </tr>
+                                    {% endif %}
+                                    
+                                    {% if bill.room_charges > 0 %}
+                                    <tr>
+                                        <td>Room Charges</td>
+                                        <td class="text-end">${{ "%.2f"|format(bill.room_charges) }}</td>
+                                    </tr>
+                                    {% endif %}
+                                    
+                                    {% if bill.lab_test_charges > 0 %}
+                                    <tr>
+                                        <td>Lab Test Charges</td>
+                                        <td class="text-end">${{ "%.2f"|format(bill.lab_test_charges) }}</td>
+                                    </tr>
+                                    {% endif %}
+                                    
+                                    {% if bill.other_charges > 0 %}
+                                    <tr>
+                                        <td>Other Charges</td>
+                                        <td class="text-end">${{ "%.2f"|format(bill.other_charges) }}</td>
+                                    </tr>
+                                    {% endif %}
+                                    
+                                    {% if bill.discount > 0 %}
+                                    <tr class="table-success">
+                                        <td>Discount</td>
+                                        <td class="text-end">-${{ "%.2f"|format(bill.discount) }}</td>
+                                    </tr>
+                                    {% endif %}
+                                    
+                                    <tr class="table-primary">
+                                        <td>Total Amount</td>
+                                        <td class="text-end">${{ "%.2f"|format(bill.total_amount) }}</td>
+                                    </tr>
+                                    
+                                    <tr class="table-info">
+                                        <td>Paid Amount</td>
+                                        <td class="text-end">${{ "%.2f"|format(bill.paid_amount) }}</td>
+                                    </tr>
+                                    
+                                    <tr class="fw-bold {% if bill.balance > 0 %}table-danger{% else %}table-success{% endif %}">
+                                        <td>Balance Due</td>
+                                        <td class="text-end">${{ "%.2f"|format(bill.balance) }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% if bill.description %}
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h6 class="mb-0">Description</h6>
+                    </div>
+                    <div class="card-body">
+                        <p style="white-space: pre-line">{{ bill.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Action Buttons -->
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex flex-wrap gap-2 justify-content-end">
+                    {% if bill.payment_status != 'paid' %}
+                    <a href="{{ url_for('main.edit_bill', id=bill.id) }}" class="btn btn-success">
+                        <i class="fas fa-money-bill-wave me-1"></i> Record Payment
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

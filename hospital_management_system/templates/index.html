@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - Hospital Management System{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 class="display-4 mb-4">Welcome to Hospital Management System</h1>
+            <p class="lead mb-5">A comprehensive solution for managing hospital operations, appointments, and patient records.</p>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <i class="fas fa-user-md fa-3x text-primary mb-3"></i>
+                            <h3>For Healthcare Providers</h3>
+                            <p class="text-muted">Manage appointments, patient records, and medical history efficiently.</p>
+                            <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <i class="fas fa-user fa-3x text-success mb-3"></i>
+                            <h3>For Patients</h3>
+                            <p class="text-muted">Book appointments, view medical records, and communicate with healthcare providers.</p>
+                            <a href="{{ url_for('register') }}" class="btn btn-success">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-5">
+                <h2 class="mb-4">Key Features</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="fas fa-calendar-check fa-2x text-primary mb-3"></i>
+                                <h5>Appointment Management</h5>
+                                <p class="text-muted">Schedule and manage appointments easily</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="fas fa-notes-medical fa-2x text-success mb-3"></i>
+                                <h5>Medical Records</h5>
+                                <p class="text-muted">Access and update patient records securely</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="fas fa-comments fa-2x text-info mb-3"></i>
+                                <h5>Communication</h5>
+                                <p class="text-muted">Chat with healthcare providers and staff</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

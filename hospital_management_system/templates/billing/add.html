@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block title %}Create New Bill - Hospital Management System{% endblock %}
+
+{% block content %}
+<div class="card shadow">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="fas fa-file-invoice-dollar me-2"></i>Create New Bill</h5>
+        <a href="{{ url_for('main.billing') }}" class="btn btn-sm btn-outline-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Back to Billing
+        </a>
+    </div>
+    <div class="card-body">
+        <form method="POST" class="needs-validation" novalidate id="bill-form">
+            {{ form.hidden_tag() }}
+            
+            <div class="row">
+                <!-- Patient Selection -->
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-0">Patient Information</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="{{ form.patient_id.id }}" class="form-label">Patient</label>
+                                {{ form.patient_id(class="form-select" + (" is-invalid" if form.patient_id.errors else "")) }}
+                                {% if form.patient_id.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.patient_id.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.description.id }}" class="form-label">Bill Description</label>
+                                {{ form.description(class="form-control" + (" is-invalid" if form.description.errors else ""), rows="3", placeholder="Enter bill description") }}
+                                {% if form.description.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.description.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-0">Payment Information</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="{{ form.payment_status.id }}" class="form-label">Payment Status</label>
+                                    {{ form.payment_status(class="form-select" + (" is-invalid" if form.payment_status.errors else "")) }}
+                                    {% if form.payment_status.errors %}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.payment_status.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="{{ form.payment_method.id }}" class="form-label">Payment Method</label>
+                                    {{ form.payment_method(class="form-select" + (" is-invalid" if form.payment_method.errors else "")) }}
+                                    {% if form.payment_method.errors %}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.payment_method.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="{{ form.paid_amount.id }}" class="form-label">Paid Amount ($)</label>
+                                {{ form.paid_amount(class="form-control" + (" is-invalid" if form.paid_amount.errors else ""), id="paid-amount") }}
+                                {% if form.paid_amount.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.paid_amount.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Billing Items -->
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-0">Billing Items</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="{{ form.doctor_fee.id }}" class="form-label">Doctor Fee ($)</label>
+                                {{ form.doctor_fee(class="form-control charge-item" + (" is-invalid" if form.doctor_fee.errors else "")) }}
+                                {% if form.doctor_fee.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.doctor_fee.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.medication_charges.id }}" class="form-label">Medication Charges ($)</label>
+                                {{ form.medication_charges(class="form-control charge-item" + (" is-invalid" if form.medication_charges.errors else "")) }}
+                                {% if form.medication_charges.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.medication_charges.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.room_charges.id }}" class="form-label">Room Charges ($)</label>
+                                {{ form.room_charges(class="form-control charge-item" + (" is-invalid" if form.room_charges.errors else "")) }}
+                                {% if form.room_charges.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.room_charges.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.lab_test_charges.id }}" class="form-label">Lab Test Charges ($)</label>
+                                {{ form.lab_test_charges(class="form-control charge-item" + (" is-invalid" if form.lab_test_charges.errors else "")) }}
+                                {% if form.lab_test_charges.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.lab_test_charges.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.other_charges.id }}" class="form-label">Other Charges ($)</label>
+                                {{ form.other_charges(class="form-control charge-item" + (" is-invalid" if form.other_charges.errors else "")) }}
+                                {% if form.other_charges.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.other_charges.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.discount.id }}" class="form-label">Discount ($)</label>
+                                {{ form.discount(class="form-control charge-item" + (" is-invalid" if form.discount.errors else "")) }}
+                                {% if form.discount.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.discount.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.total_amount.id }}" class="form-label fw-bold">Total Amount ($)</label>
+                                {{ form.total_amount(class="form-control fw-bold" + (" is-invalid" if form.total_amount.errors else ""), id="total-amount", readonly=true) }}
+                                {% if form.total_amount.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.total_amount.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="{{ url_for('main.billing') }}" class="btn btn-secondary me-md-2">Cancel</a>
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to calculate total
+    function calculateTotal() {
+        const doctorFee = parseFloat(document.getElementById('doctor_fee').value) || 0;
+        const medicationCharges = parseFloat(document.getElementById('medication_charges').value) || 0;
+        const roomCharges = parseFloat(document.getElementById('room_charges').value) || 0;
+        const labTestCharges = parseFloat(document.getElementById('lab_test_charges').value) || 0;
+        const otherCharges = parseFloat(document.getElementById('other_charges').value) || 0;
+        const discount = parseFloat(document.getElementById('discount').value) || 0;
+        
+        let total = doctorFee + medicationCharges + roomCharges + labTestCharges + otherCharges - discount;
+        total = Math.max(0, total); // Ensure total is not negative
+        
+        document.getElementById('total-amount').value = total.toFixed(2);
+    }
+    
+    // Add event listeners to all charge inputs
+    const chargeInputs = document.querySelectorAll('.charge-item');
+    chargeInputs.forEach(input => {
+        input.addEventListener('input', calculateTotal);
+    });
+    
+    // Calculate total on page load
+    calculateTotal();
+    
+    // Validate paid amount not greater than total
+    document.getElementById('bill-form').addEventListener('submit', function(e) {
+        const totalAmount = parseFloat(document.getElementById('total-amount').value) || 0;
+        const paidAmount = parseFloat(document.getElementById('paid-amount').value) || 0;
+        
+        if (paidAmount > totalAmount) {
+            e.preventDefault();
+            alert('Paid amount cannot be greater than the total amount.');
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,986 @@
+/* custom.css - Custom styles for Hospital Management System */
+
+/* General Styles */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #000000;
+}
+
+.container {
+    flex: 1;
+    padding: 2rem 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Card Styles */
+.card {
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+    border: 1px solid #e9ecef;
+}
+
+.card.patients {
+    background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+}
+
+.card.doctors {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+}
+
+.card.appointments {
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+}
+
+.card.revenue {
+    background: linear-gradient(135deg, #ffc107 0%, #ffa000 100%);
+}
+
+/* Force black text for all elements in stat cards */
+.card.patients *,
+.card.doctors *,
+.card.appointments *,
+.card.revenue * {
+    color: #000000 !important;
+}
+
+/* Specific overrides for stat cards */
+.card.patients h6,
+.card.doctors h6,
+.card.appointments h6,
+.card.revenue h6,
+.card.patients p,
+.card.doctors p,
+.card.appointments p,
+.card.revenue p,
+.card.patients h2,
+.card.doctors h2,
+.card.appointments h2,
+.card.revenue h2,
+.card.patients span,
+.card.doctors span,
+.card.appointments span,
+.card.revenue span {
+    color: #000000 !important;
+}
+
+/* Remove any text-white classes */
+.text-white {
+    color: #000000 !important;
+}
+
+/* Remove any text-white-50 classes */
+.text-white-50 {
+    color: #000000 !important;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    color: #000000;
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.card-body {
+    background-color: #f8f9fa;
+    color: #000000;
+    padding: 1.25rem;
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    color: #000000;
+    padding: 1rem 1.25rem;
+    border-radius: 0 0 1rem 1rem;
+}
+
+.card-title {
+    color:#000000;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.card-subtitle {
+    color:#000000;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    opacity: 0.9;
+}
+
+.card-text {
+    color: black;
+    margin-bottom: 1rem;
+}
+
+.card-link {
+    color: #2196f3;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.card-link:hover {
+    color: #1976d2;
+    text-decoration: underline;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e9ecef;
+}
+
+.dashboard-card.patients {
+    background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+}
+
+.dashboard-card.doctors {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+}
+
+.dashboard-card.appointments {
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+}
+
+.dashboard-card.revenue {
+    background: linear-gradient(135deg, #ffc107 0%, #ffa000 100%);
+}
+
+.dashboard-card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+}
+
+.dashboard-card-title {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.dashboard-card-content {
+    background-color: #f8f9fa;
+    color: #000000;
+    padding: 1rem;
+}
+
+/* Info Cards */
+.info-card {
+    background-color: #f8f9fa;;
+    border: 1px solid #e9ecef;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.info-card-header {
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.info-card-body {
+    color: #000000;
+}
+
+/* Alert Cards */
+.alert-card {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.alert-card-header {
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.alert-card-body {
+    color: #000000;
+}
+
+/* Profile Cards */
+.profile-card {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.profile-card-header {
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.profile-card-body {
+    color: #000000;
+}
+
+/* Medical Record Cards */
+.medical-record-card {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.medical-record-card-header {
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.medical-record-card-body {
+    color: #000000;
+}
+
+/* Appointment Cards */
+.appointment-card {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.appointment-card-header {
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.appointment-card-body {
+    color: #000000;
+}
+
+/* Billing Cards */
+.billing-card {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.billing-card-header {
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.billing-card-body {
+    color: #000000;
+}
+
+/* Card Hover Effects */
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Card Grid Layout */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive Card Adjustments */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .card-header, .card-body, .card-footer {
+        padding: 1rem;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+    }
+    
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Dashboard Statistics */
+.stat-card {
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.stat-card.patients {
+    background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+}
+
+.stat-card.doctors {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+}
+
+.stat-card.appointments {
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+}
+
+.stat-card.revenue {
+    background: linear-gradient(135deg, #ffc107 0%, #ffa000 100%);
+}
+
+.stat-title {
+    color: #000000;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    color: #000000;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat-icon {
+    color: #000000;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Quick Actions Section */
+.quick-actions {
+    margin-bottom: 2rem;
+}
+
+.quick-action-card {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.quick-action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.quick-action-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #2196f3;
+}
+
+.quick-action-title {
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.quick-action-text {
+    color: #000000;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Patient List and Details */
+.patient-list {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.patient-details {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.patient-info {
+    color: #000000;
+    margin-bottom: 1rem;
+}
+
+.patient-info-label {
+    font-weight: 600;
+    color: #000000;
+}
+
+/* Appointment Section */
+.appointment-section {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.appointment-time {
+    color: #000000;
+    font-weight: 600;
+}
+
+.appointment-status {
+    color: #000000;
+    font-weight: 500;
+}
+
+/* Medical Records */
+.medical-record {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.record-date {
+    color: #000000;
+    font-weight: 600;
+}
+
+.record-details {
+    color: #000000;
+    margin-top: 0.5rem;
+}
+
+/* Billing Section */
+.billing-section {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.bill-item {
+    color: #000000;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.bill-total {
+    color: #000000;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+/* Form Styles */
+.form-container {
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    margin: 2rem auto;
+    border: 1px solid #e9ecef;
+}
+
+.form-label {
+    color: #000000;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    color: #000000;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    background-color: #ffffff;
+    border-color: #2196f3;
+    box-shadow: 0 0 0 0.25rem rgba(33, 150, 243, 0.15);
+    color: #000000;
+}
+
+.form-control::placeholder {
+    color: #757575;
+}
+
+/* Table Styles */
+.table {
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e9ecef;
+}
+
+.table thead {
+    background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+    border-bottom: none;
+}
+
+.table thead th {
+    color: #000000;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    border-bottom: none;
+    padding: 1rem;
+}
+
+.table tbody {
+    background-color: #f8f9fa;
+}
+
+.table td {
+    color: #000000;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+/* Status Indicators */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    background-color: #ffffff;
+}
+
+.status-active {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.status-pending {
+    background-color: #fff3e0;
+    color: #f57c00;
+}
+
+.status-completed {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+/* Navigation */
+.navbar {
+    background-color: #2196f3 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #e3f2fd !important;
+}
+
+/* Footer */
+footer {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 1.5rem 0;
+    margin-top: auto;
+    border-top: 1px solid #e9ecef;
+}
+
+footer h5 {
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+footer p {
+    color: #000000;
+    margin-bottom: 0.5rem;
+}
+
+footer a {
+    color: #2196f3;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #1976d2;
+    text-decoration: underline;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .stat-card, .quick-action-card, .patient-list, .appointment-section {
+        margin-bottom: 1rem;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .quick-action-icon {
+        font-size: 2rem;
+    }
+    
+    .form-select, .form-control {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+    
+    footer {
+        padding: 1rem 0;
+    }
+    
+    footer h5 {
+        font-size: 1rem;
+    }
+    
+    footer p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Form Select Styles */
+.form-select {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    color: #000000;
+    font-size: 1rem;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.form-select:focus {
+    background-color: #ffffff;
+    border-color: #2196f3;
+    box-shadow: 0 0 0 0.25rem rgba(33, 150, 243, 0.15);
+    color: #000000;
+}
+
+.form-select option {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 0.5rem;
+}
+
+/* Input Group Updates */
+.input-group {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    color: #000000;
+    font-weight: 500;
+}
+
+.input-group-text i {
+    color: #000000;
+}
+
+/* Button Text Updates */
+.btn-primary {
+    background-color: #2196f3;
+    border-color: #2196f3;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #1976d2;
+    border-color: #1976d2;
+    color: #ffffff;
+}
+
+.btn-outline-primary {
+    color: #2196f3;
+    border-color: #2196f3;
+    background-color: #ffffff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #2196f3;
+    border-color: #2196f3;
+    color: #ffffff;
+}
+
+/* Alert Text Updates */
+.alert {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    color: #000000;
+    border-radius: 0.5rem;
+}
+
+.alert-success {
+    background-color: #e8f5e9;
+    border-color: #c8e6c9;
+    color: #2e7d32;
+}
+
+.alert-danger {
+    background-color: #ffebee;
+    border-color: #ffcdd2;
+    color: #c62828;
+}
+
+.alert-warning {
+    background-color: #fff3e0;
+    border-color: #ffe0b2;
+    color: #ef6c00;
+}
+
+.alert-info {
+    background-color: #e3f2fd;
+    border-color: #bbdefb;
+    color: #1565c0;
+}
+
+/* Quick Stats Section */
+.quick-stats {
+    margin-bottom: 2rem;
+}
+
+.quick-stat-card {
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    color: #000000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.quick-stat-card.patients {
+    background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+}
+
+.quick-stat-card.doctors {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+}
+
+.quick-stat-card.appointments {
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+}
+
+.quick-stat-card.revenue {
+    background: linear-gradient(135deg, #ffc107 0%, #ffa000 100%);
+}
+
+.quick-stat-value {
+    color: #000000;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.quick-stat-label {
+    color: #000000;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Dashboard Summary Cards */
+.summary-card {
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    color: #000000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.summary-card.patients {
+    background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+}
+
+.summary-card.doctors {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+}
+
+.summary-card.appointments {
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+}
+
+.summary-card.revenue {
+    background: linear-gradient(135deg, #ffc107 0%, #ffa000 100%);
+}
+
+.summary-card-title {
+    color: #000000;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.summary-card-value {
+    color: #000000;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.summary-card-description {
+    color: #000000;
+    font-size: 0.9rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .stat-card, .quick-stat-card, .summary-card {
+        padding: 1.25rem;
+    }
+    
+    .stat-value, .quick-stat-value, .summary-card-value {
+        font-size: 1.5rem;
+    }
+    
+    .stat-title, .quick-stat-label, .summary-card-title {
+        font-size: 1rem;
+    }
+}
+
+/* Content Area */
+.content-area {
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e9ecef;
+}
+
+/* Modal Styles */
+.modal-content {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    color: #000000;
+}
+
+.modal-body {
+    background-color: #f8f9fa;
+    color: #000000;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    color: #000000;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .content-area {
+        padding: 1rem;
+    }
+    
+    .form-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .card-header, .card-body, .card-footer {
+        padding: 1rem;
+    }
+}
+
+.card.patients h6,
+.card.doctors h6,
+.card.appointments h6,
+.card.revenue h6,
+.card.patients p,
+.card.doctors p,
+.card.appointments p,
+.card.revenue p {
+    color: #000000 !important;
+}
+
+.card.patients h2,
+.card.doctors h2,
+.card.appointments h2,
+.card.revenue h2 {
+    color: #000000 !important;
+}
+
+.card.patients,
+.card.doctors,
+.card.appointments,
+.card.revenue {
+    color: #000000;
+}
+
+/* Input group icon */
+.input-group-text {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    color: #000000;
+    font-weight: 500;
+}
+
+.input-group-text i {
+    color: #000000;
+}

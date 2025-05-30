@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Medical Record - Hospital Management System{% endblock %}
+
+{% block content %}
+<div class="card shadow">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="fas fa-notes-medical me-2"></i>Medical Record</h5>
+        <div>
+            {% if current_user.role in ['doctor', 'admin'] and (current_user.role == 'admin' or current_user.doctor_profile.id == record.doctor_id) %}
+            <a href="{{ url_for('edit_medical_record', id=record.id) }}" class="btn btn-sm btn-outline-primary me-2">
+                <i class="fas fa-edit me-1"></i> Edit
+            </a>
+            {% endif %}
+            <a href="{{ url_for('medical_records') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Back to Medical Records
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <!-- Basic Information -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-light">
+                        <h6 class="mb-0">Basic Information</h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-borderless">
+                            <tr>
+                                <th style="width: 30%">Record Date:</th>
+                                <td>{{ record.record_date.strftime('%d-%m-%Y %H:%M') }}</td>
+                            </tr>
+                            <tr>
+                                <th>Patient:</th>
+                                <td>
+                                    <a href="{{ url_for('view_patient', id=record.patient.id) }}">
+                                        {{ record.patient.get_full_name() }}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Doctor:</th>
+                                <td>
+                                    <a href="{{ url_for('view_doctor', id=record.doctor.id) }}">
+                                        {{ record.doctor.user.get_full_name() }}
+                                    </a>
+                                    <div><small class="text-muted">{{ record.doctor.specialization }}</small></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Follow-up Date:</th>
+                                <td>
+                                    {% if record.follow_up_date %}
+                                    {{ record.follow_up_date.strftime('%d-%m-%Y') }}
+                                    {% else %}
+                                    <span class="text-muted">None scheduled</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        {% if record.follow_up_date and record.follow_up_date > current_user.last_login.date() %}
+                        <div class="d-grid gap-2 mt-3">
+                            <a href="{{ url_for('add_appointment') }}?patient_id={{ record.patient.id }}&doctor_id={{ record.doctor.id }}" class="btn btn-outline-primary">
+                                <i class="fas fa-calendar-plus me-1"></i> Schedule Follow-up Appointment
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Medications -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-light">
+                        <h6 class="mb-0">Medications</h6>
+                    </div>
+                    <div class="card-body">
+                        {% if record.medications %}
+                        <p style="white-space: pre-line">{{ record.medications }}</p>
+                        {% else %}
+                        <p class="text-muted">No medications prescribed.</p>
+                        {% endif %}
+                        
+                        <div class="mt-3">
+                            <h6 class="card-subtitle mb-2">Additional Notes</h6>
+                            {% if record.notes %}
+                            <p style="white-space: pre-line">{{ record.notes }}</p>
+                            {% else %}
+                            <p class="text-muted">No additional notes.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Diagnosis -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-light">
+                        <h6 class="mb-0">Diagnosis</h6>
+                    </div>
+                    <div class="card-body">
+                        <p style="white-space: pre-line">{{ record.diagnosis }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Treatment -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-light">
+                        <h6 class="mb-0">Treatment Plan</h6>
+                    </div>
+                    <div class="card-body">
+                        <p style="white-space: pre-line">{{ record.treatment }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="{{ url_for('view_patient', id=record.patient.id) }}" class="btn btn-info">
+                        <i class="fas fa-user-injured me-1"></i> View Patient Details
+                    </a>
+                    
+                    <a href="{{ url_for('add_bill') }}?patient_id={{ record.patient.id }}" class="btn btn-warning">
+                        <i class="fas fa-file-invoice-dollar me-1"></i> Create Bill
+                    </a>
+                    
+                    {% if record.follow_up_date %}
+                    <a href="{{ url_for('add_appointment') }}?patient_id={{ record.patient.id }}&doctor_id={{ record.doctor.id }}" class="btn btn-success">
+                        <i class="fas fa-calendar-plus me-1"></i> Schedule Follow-up
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

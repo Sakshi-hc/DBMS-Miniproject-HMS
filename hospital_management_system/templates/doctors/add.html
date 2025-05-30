@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}Add Doctor - Hospital Management System{% endblock %}
+
+{% block content %}
+<div class="card shadow">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="fas fa-user-md me-2"></i>Add New Doctor</h5>
+        <div>
+            <a href="{{ url_for('main.doctors') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Back to Doctors
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <form method="POST" class="needs-validation" novalidate>
+            {{ form.hidden_tag() }}
+            
+            <div class="row g-3">
+                <!-- User Selection -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-0">User Account</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                {{ form.user_id.label(class="form-label") }}
+                                {{ form.user_id(class="form-select" + (" is-invalid" if form.user_id.errors else "")) }}
+                                {% if form.user_id.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.user_id.errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                                <small class="form-text text-muted">Select the user account associated with this doctor profile</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Professional Information -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-0">Professional Information</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                {{ form.specialization.label(class="form-label") }}
+                                {{ form.specialization(class="form-control" + (" is-invalid" if form.specialization.errors else "")) }}
+                                {% if form.specialization.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.specialization.errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                {{ form.qualification.label(class="form-label") }}
+                                {{ form.qualification(class="form-control" + (" is-invalid" if form.qualification.errors else "")) }}
+                                {% if form.qualification.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.qualification.errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                {{ form.license_number.label(class="form-label") }}
+                                {{ form.license_number(class="form-control" + (" is-invalid" if form.license_number.errors else "")) }}
+                                {% if form.license_number.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.license_number.errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                {{ form.experience_years.label(class="form-label") }}
+                                {{ form.experience_years(class="form-control" + (" is-invalid" if form.experience_years.errors else ""), type="number", min="0") }}
+                                {% if form.experience_years.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.experience_years.errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                {{ form.consultation_fee.label(class="form-label") }}
+                                {{ form.consultation_fee(class="form-control" + (" is-invalid" if form.consultation_fee.errors else ""), type="number", step="0.01", min="0") }}
+                                {% if form.consultation_fee.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.consultation_fee.errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Availability -->
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-0">Availability</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                {{ form.availability.label(class="form-label") }}
+                                {{ form.availability(class="form-control" + (" is-invalid" if form.availability.errors else ""), rows="4", placeholder="Enter availability details (e.g., Monday-Friday: 9:00 AM - 5:00 PM)") }}
+                                {% if form.availability.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.availability.errors %}
+                                    {{ error }}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                                <small class="form-text text-muted">Specify the days and times when the doctor is available for appointments</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 d-flex justify-content-end gap-2">
+                <a href="{{ url_for('main.doctors') }}" class="btn btn-secondary">
+                    <i class="fas fa-times me-1"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-1"></i> Add Doctor
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
